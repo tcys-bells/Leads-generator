@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peace of Mind — Financial Protection That Has Your Back</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    /* ── Colour tokens ── */
+    :root {
+      --red:    #D0021B;
+      --red2:   #A80016;
+      --light:  #FFF5F5;
+      --grey:   #f7f7f7;
+      --text:   #333;
+      --muted:  #666;
+      --white:  #fff;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,.10);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      background: var(--red);
+      color: #fff;
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .nav-logo-text {
+      font-size: .95rem;
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .nav-logo-text small {
+      display: block;
+      font-weight: 400;
+      font-size: .72rem;
+      color: #888;
+    }
+    .nav-cta {
+      background: var(--red);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--red2); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--red) 0%, #7B0010 100%);
+      color: #fff;
+      padding: 80px 24px 88px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-eyebrow {
+      font-size: .8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+    .hero h1 span { color: #FFD0D0; }
+    .hero-lead {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      opacity: .9;
+      max-width: 560px;
+      margin: 0 auto 12px;
+      font-style: italic;
+    }
+    .hero-sub {
+      font-size: clamp(.88rem, 2vw, 1rem);
+      opacity: .8;
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .hero-btns {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: #fff;
+      color: var(--red);
+      padding: 14px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,.7);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.12); }
+
+    /* ── Trust bar ── */
+    .trust-bar {
+      background: var(--light);
+      border-bottom: 1px solid #f0d0d0;
+      padding: 18px 24px;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 40px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .875rem; color: var(--text); font-weight: 500;
+    }
+    .trust-icon { font-size: 1.2rem; }
+
+    /* ── Section scaffold ── */
+    section { padding: 68px 24px; }
+    .section-label {
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #111;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      font-size: .97rem;
+    }
+
+    /* ── Scenarios ── */
+    .scenarios { background: var(--grey); }
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 22px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .scenario-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column;
+    }
+    .scenario-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,.13); }
+    .scenario-header {
+      background: linear-gradient(135deg, var(--red), #7B0010);
+      padding: 20px 22px 16px;
+      color: #fff;
+    }
+    .scenario-header .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .scenario-header h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .scenario-header .before {
+      font-size: .82rem;
+      opacity: .85;
+      font-style: italic;
+    }
+    .scenario-body {
+      padding: 18px 22px 22px;
+      flex: 1;
+    }
+    .scenario-body .divider {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .scenario-body .divider span {
+      font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--red); font-weight: 700; white-space: nowrap;
+    }
+    .scenario-body .divider hr {
+      flex: 1; border: none; border-top: 1.5px solid #f0d0d0;
+    }
+    .scenario-body .after {
+      font-size: .9rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .scenario-body .after strong { color: var(--red); }
+
+    /* ── Pillars ── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 28px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .pillar {
+      text-align: center;
+      padding: 28px 16px;
+      border-radius: var(--radius);
+      background: var(--light);
+    }
+    .pillar-icon {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+    .pillar h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #111; }
+    .pillar p  { font-size: .875rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── Products ── */
+    .products { background: var(--grey); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 26px 22px 22px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+      border-top: 4px solid var(--red);
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,.13); }
+    .product-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .product-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 7px; color: #111; }
+    .product-card p  { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+    .product-tag {
+      display: inline-block;
+      margin-top: 13px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--light);
+      color: var(--red);
+      padding: 3px 10px;
+      border-radius: 50px;
+    }
+
+    /* ── QR / Connect section ── */
+    .connect { background: var(--grey); }
+    .connect-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+    }
+    .qr-box {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      flex: 0 0 auto;
+    }
+    .qr-label {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+    #qrcode canvas, #qrcode img { border-radius: 8px; }
+    .connect-text { flex: 1 1 260px; }
+    .connect-text h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; color: #111; }
+    .connect-text p { color: var(--muted); margin-bottom: 22px; font-size: .95rem; }
+    .connect-steps { list-style: none; }
+    .connect-steps li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: .9rem; color: var(--text);
+      margin-bottom: 12px;
+    }
+    .step-dot {
+      width: 24px; height: 24px; min-width: 24px;
+      background: var(--red);
+      border-radius: 50%;
+      color: #fff; font-size: .7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+
+    /* ── Testimonial-style pull quote ── */
+    .quote-band {
+      background: linear-gradient(135deg, var(--red), #7B0010);
+      color: #fff;
+      padding: 56px 24px;
+      text-align: center;
+    }
+    .quote-band blockquote {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: clamp(1.1rem, 3vw, 1.55rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .quote-band blockquote strong { font-weight: 700; }
+    .quote-caption {
+      margin-top: 18px;
+      font-size: .82rem;
+      opacity: .75;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 32px 32px;
+      width: 100%; max-width: 460px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      position: relative;
+      animation: slideUp .25s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none;
+      font-size: 1.5rem; cursor: pointer; color: #999;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--red); }
+    .modal-icon { font-size: 2rem; margin-bottom: 8px; }
+    .modal h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; color: #111; }
+    .modal-sub { font-size: .875rem; color: var(--muted); margin-bottom: 22px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: .82rem; font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: .93rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 72px; }
+    .form-row { display: flex; gap: 12px; }
+    .form-row .form-group { flex: 1; }
+    .form-submit {
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background .2s, transform .15s;
+    }
+    .form-submit:hover { background: var(--red2); transform: translateY(-1px); }
+    .form-note { font-size: .75rem; color: #aaa; text-align: center; margin-top: 10px; }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+    .form-success .tick {
+      width: 56px; height: 56px;
+      background: #e8f8ee;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 14px;
+    }
+    .form-success h3 { font-size: 1.2rem; margin-bottom: 6px; }
+    .form-success p { color: var(--muted); font-size: .9rem; }
+
+    /* ── Footer ── */
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: .82rem;
+    }
+    footer .footer-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px;
+      margin-bottom: 12px;
+    }
+    footer a { color: #aaa; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .hero { padding: 58px 18px 68px; }
+      section { padding: 50px 18px; }
+      .modal { padding: 28px 20px 24px; }
+      .form-row { flex-direction: column; gap: 0; }
+      .connect-inner { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAV
+  ══════════════════════════════════════ -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <span class="nav-logo-icon">🛡️</span>
+      <span class="nav-logo-text">
+        SafeHaven
+        <small>Financial Protection Specialist</small>
+      </span>
+    </a>
+    <a class="nav-cta" href="#" onclick="openModal(); return false;">Find Out More</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <p class="hero-eyebrow">Financial Protection That Has Your Back</p>
+    <h1>Because Life Doesn't<br><span>Wait for the Right Moment.</span></h1>
+    <p class="hero-lead">"The accident happened on a Tuesday. The relief was knowing I didn't have to worry about the bills."</p>
+    <p class="hero-sub">
+      When the unexpected strikes, the right coverage doesn't just pay claims —
+      it gives you back something priceless: the freedom to focus on what truly matters.
+    </p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">I Want Peace of Mind →</a>
+      <a href="#scenarios" class="btn-outline">See Real Scenarios</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       TRUST BAR
+  ══════════════════════════════════════ -->
+  <div class="trust-bar">
+    <div class="trust-item"><span class="trust-icon">😮‍💨</span> Relief When It Matters Most</div>
+    <div class="trust-item"><span class="trust-icon">🤝</span> Personalised Advisory</div>
+    <div class="trust-item"><span class="trust-icon">🔒</span> Covered for Life's Uncertainties</div>
+    <div class="trust-item"><span class="trust-icon">💚</span> Focus on Recovery, Not Bills</div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       REAL-LIFE SCENARIOS
+  ══════════════════════════════════════ -->
+  <section class="scenarios" id="scenarios">
+    <p class="section-label">What Coverage Really Means</p>
+    <h2 class="section-title">The Difference One Decision Makes</h2>
+    <p class="section-sub">Imagine facing one of these moments. The outcome depends on a decision you make today.</p>
+    <div class="scenarios-grid">
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="icon">🚗</div>
+          <h3>A Serious Accident</h3>
+          <p class="before">Without coverage: weeks in hospital, mounting bills, income gone, savings wiped.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="divider">
+            <hr><span>With coverage</span><hr>
+          </div>
+          <p class="after">The claim is filed. Medical bills are taken care of. Lost income is replaced. You focus entirely on <strong>getting better</strong> — not on the numbers.</p>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="icon">🩺</div>
+          <h3>A Critical Diagnosis</h3>
+          <p class="before">Without coverage: treatment costs spiral, family savings depleted, anxiety compounded by financial stress.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="divider">
+            <hr><span>With coverage</span><hr>
+          </div>
+          <p class="after">A lump sum arrives when you need it most. You can afford the best treatment. Your family is shielded from financial fallout. <strong>Hope stays intact.</strong></p>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="icon">👨‍👩‍👧</div>
+          <h3>The Breadwinner Falls Ill</h3>
+          <p class="before">Without coverage: mortgage at risk, children's education uncertain, a family's future hanging in the balance.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="divider">
+            <hr><span>With coverage</span><hr>
+          </div>
+          <p class="after">Income continues. The mortgage is serviced. The children's school fees are untouched. Life carries on — with <strong>dignity and stability.</strong></p>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="icon">🌅</div>
+          <h3>Planning for Retirement</h3>
+          <p class="before">Without a plan: reaching your 60s uncertain, dependent on others, with no financial independence.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="divider">
+            <hr><span>With coverage</span><hr>
+          </div>
+          <p class="after">Regular payouts, built-up savings, and a nest egg that grows quietly in the background. Retirement means <strong>freedom, not fear.</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PULL QUOTE
+  ══════════════════════════════════════ -->
+  <div class="quote-band">
+    <blockquote>
+      "I received the diagnosis on a Friday. By Monday, I had already spoken to my adviser.<br>
+      For the first time in days, I felt <strong>calm</strong> — because I knew we were covered."
+    </blockquote>
+    <p class="quote-caption">— The feeling good coverage gives you</p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PILLARS
+  ══════════════════════════════════════ -->
+  <section id="why">
+    <p class="section-label">What We Stand For</p>
+    <h2 class="section-title">More Than a Policy. A Partnership.</h2>
+    <p class="section-sub">Our commitment is to help you build a safety net that actually catches you when life gets hard.</p>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon">🎯</div>
+        <h4>Needs-First Approach</h4>
+        <p>We understand your life stage and goals before recommending anything — tailored, never templated.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">💬</div>
+        <h4>Plain-Language Advice</h4>
+        <p>No jargon, no pressure. You'll always know exactly what you're covered for and what you're not.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🔄</div>
+        <h4>Coverage That Grows With You</h4>
+        <p>Life changes. Your protection should too. We review and evolve your plan as your needs shift.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤲</div>
+        <h4>Guided Claims Support</h4>
+        <p>When the worst happens, we don't disappear. We walk you through every step of the claims process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PRODUCTS
+  ══════════════════════════════════════ -->
+  <section class="products" id="products">
+    <p class="section-label">Coverage Options</p>
+    <h2 class="section-title">A Plan for Every Stage of Life</h2>
+    <p class="section-sub">From day-one protection to long-term wealth — we'll match the right solution to your situation.</p>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon">🛡️</div>
+        <h3>Whole Life Protection</h3>
+        <p>Lifelong coverage with a savings component. Build cash value over time while keeping those you love protected.</p>
+        <span class="product-tag">Lifelong Cover</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">⏱️</div>
+        <h3>Term Protection</h3>
+        <p>Maximum coverage at an affordable premium during your peak earning years — when dependants need it most.</p>
+        <span class="product-tag">Cost-Effective</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🌱</div>
+        <h3>Endowment Plans</h3>
+        <p>Goal-based savings with life cover built in. Ideal for funding education, milestones, or a retirement nest egg.</p>
+        <span class="product-tag">Savings + Protection</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📈</div>
+        <h3>Investment-Linked Plans</h3>
+        <p>Grow your wealth through market-linked funds while maintaining life protection. Flexible and long-term.</p>
+        <span class="product-tag">Wealth Growth</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">❤️‍🩹</div>
+        <h3>Critical Illness Cover</h3>
+        <p>A lump-sum payout on diagnosis of a serious illness. Focus on recovery without the financial burden.</p>
+        <span class="product-tag">Health Protection</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">✨</div>
+        <h3>Tailored Solutions</h3>
+        <p>New products are introduced regularly. Tell us your situation and we'll find the best fit — whatever it may be.</p>
+        <span class="product-tag">Personalised</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       QR / CONNECT
+  ══════════════════════════════════════ -->
+  <section class="connect" id="connect">
+    <p class="section-label">Take the First Step</p>
+    <h2 class="section-title">Curious if You're Covered Enough?</h2>
+    <p class="section-sub">Scan the QR code or tap the button to share your details. A free, no-obligation conversation could make all the difference.</p>
+    <div class="connect-inner">
+      <div class="qr-box">
+        <div id="qrcode"></div>
+        <p class="qr-label">📱 Scan with your phone camera<br>to open this page</p>
+      </div>
+      <div class="connect-text">
+        <h2>Here's How Easy It Is</h2>
+        <p>Less than 2 minutes to start. No commitments — just a conversation about your peace of mind.</p>
+        <ul class="connect-steps">
+          <li>
+            <span class="step-dot">1</span>
+            <span>Scan the QR code or tap <strong>Find Out More</strong></span>
+          </li>
+          <li>
+            <span class="step-dot">2</span>
+            <span>Share your name, phone number, and email address</span>
+          </li>
+          <li>
+            <span class="step-dot">3</span>
+            <span>Tell us briefly what's on your mind — or what keeps you up at night</span>
+          </li>
+          <li>
+            <span class="step-dot">4</span>
+            <span>We'll reach out within 1 business day for a free, pressure-free chat</span>
+          </li>
+        </ul>
+        <br>
+        <a href="#" style="display:inline-block;background:var(--red);color:#fff;padding:13px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.95rem;" onclick="openModal(); return false;">Find Out More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#scenarios">Scenarios</a>
+      <a href="#why">Our Approach</a>
+      <a href="#products">Coverage</a>
+      <a href="#connect">Get Started</a>
+      <a href="#" onclick="openModal(); return false;">Enquire</a>
+    </div>
+    <p>© <span id="year"></span> SafeHaven Financial Protection. All rights reserved.</p>
+    <p style="margin-top:6px;color:#666;">This site is for informational purposes only and does not constitute financial advice. Coverage is subject to policy terms and conditions.</p>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+       LEAD CAPTURE MODAL
+  ══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+      <div class="modal-icon">🛡️</div>
+      <h2 id="modalTitle">Let's Talk About Your Cover</h2>
+      <p class="modal-sub">Share a few details and we'll reach out for a free, no-obligation conversation.</p>
+
+      <form id="leadForm" onsubmit="submitForm(event)" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" placeholder="Jane" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" placeholder="Doe" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" placeholder="+60 12-345 6789" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" placeholder="jane@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="interest">What would you like to explore?</label>
+          <select id="interest">
+            <option value="">— Select an area of interest —</option>
+            <option>Protection against accidents or illness</option>
+            <option>Income replacement if I can't work</option>
+            <option>Savings &amp; wealth growth</option>
+            <option>Retirement planning</option>
+            <option>Coverage for my family</option>
+            <option>Not sure yet — I'd like guidance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">What's on your mind? (optional)</label>
+          <textarea id="message" placeholder="e.g. I want to make sure my family is taken care of if something happens to me…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send My Enquiry →</button>
+        <p class="form-note">🔒 Your details are kept private and used only to respond to your enquiry.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="tick">✅</div>
+        <h3>You're on your way.</h3>
+        <p>We've received your enquiry and will be in touch within 1 business day. That's one step closer to real peace of mind.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════ -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // QR Code — points to the current page URL
+    var qrTarget = window.location.href.split('#')[0];
+    new QRCode(document.getElementById('qrcode'), {
+      text: qrTarget,
+      width: 160,
+      height: 160,
+      colorDark: '#D0021B',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function submitForm(e) {
+      e.preventDefault();
+      var required = e.target.querySelectorAll('[required]');
+      var valid = true;
+      required.forEach(function(el) {
+        el.style.borderColor = '';
+        if (!el.value.trim()) { el.style.borderColor = '#D0021B'; valid = false; }
+      });
+      if (!valid) return;
+
+      // TODO: replace with your actual form submission endpoint
+      // e.g. fetch('/api/leads', { method: 'POST', body: JSON.stringify({...}) })
+      console.log({
+        firstName: document.getElementById('firstName').value,
+        lastName:  document.getElementById('lastName').value,
+        phone:     document.getElementById('phone').value,
+        email:     document.getElementById('email').value,
+        interest:  document.getElementById('interest').value,
+        message:   document.getElementById('message').value
+      });
+
+      document.getElementById('leadForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CHATBOT EMBED — paste your AgentX / chatbot snippet here
+  ════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>
